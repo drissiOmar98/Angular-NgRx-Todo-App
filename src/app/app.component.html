@@ -1,0 +1,135 @@
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <div class="navbar-left">
+      <h1 class="app-title">NgRx Auth & Tasks</h1>
+    </div>
+
+    <div class="navbar-right">
+      <ng-container *ngIf="isAuthenticated$ | async; else guest">
+        <span class="welcome-text">Welcome, <strong>{{ username$ | async }}</strong></span>
+        <button class="auth-btn logout" (click)="logoutUser()">Logout</button>
+      </ng-container>
+      <ng-template #guest>
+        <span class="welcome-text">Not logged in</span>
+        <button class="auth-btn login" (click)="loginUser()">Login</button>
+      </ng-template>
+    </div>
+  </div>
+</nav>
+
+
+<div *ngIf="isAuthenticated$ | async"  class="container">
+  <h1>📝 My Task List</h1>
+  <p class="subtitle">Incomplete Tasks: <strong>{{ incompleteTasksCount$ | async }}</strong></p>
+
+  <div class="input-section">
+    <input
+      [(ngModel)]="newTaskDescription"
+      placeholder="Add a new task..."
+      class="task-input"
+    />
+    <button (click)="addTask()" class="add-btn">Add</button>
+  </div>
+
+  <ul class="task-list">
+    <li *ngFor="let task of (allTasks$ | async)" class="task-item">
+      <label class="checkbox-wrapper">
+        <input
+          type="checkbox"
+          [checked]="task.completed"
+          (change)="toggleCompletion(task.id)"
+        />
+        <span [class.completed]="task.completed">{{ task.description }}</span>
+      </label>
+      <button (click)="removeTask(task.id)" class="delete-btn">🗑️</button>
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="isAuthenticated$ | async" class="weather-app">
+  <div class="weather-card">
+    <div class="app-header">
+      <h1 class="app-title">Weather Forecast</h1>
+      <p class="app-subtitle">Get real-time weather updates</p>
+    </div>
+
+    <div class="search-container">
+      <div class="search-box">
+        <input
+          [(ngModel)]="city"
+          placeholder="Search city..."
+          (keyup.enter)="getWeather()"
+          class="search-input"
+        >
+        <button (click)="getWeather()" class="search-button">
+          <i class="search-icon"></i>
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="loading$ | async" class="loading-state">
+      <div class="weather-shimmer">
+        <div class="shimmer-line"></div>
+        <div class="shimmer-line medium"></div>
+        <div class="shimmer-line short"></div>
+      </div>
+    </div>
+
+    <div *ngIf="error$ | async as error" class="error-state">
+      <div class="error-icon">!</div>
+      <p class="error-message">{{ error }}</p>
+      <button class="retry-button" (click)="getWeather()">Try Again</button>
+    </div>
+
+    <div *ngIf="weather$ | async as weather" class="weather-display" @fadeIn>
+      <div class="location">
+        <h2>{{ weather.city }}</h2>
+        <p class="current-date">{{ currentDate | date:'EEEE, MMMM d' }}</p>
+      </div>
+
+      <div class="weather-main">
+        <div class="temperature">
+          {{ weather.temperature }}<span class="degree">°C</span>
+        </div>
+        <div class="weather-icon">
+          <div *ngIf="weather.description.includes('cloud')" class="cloud-icon"></div>
+          <div *ngIf="weather.description.includes('sun')" class="sun-icon"></div>
+          <div *ngIf="weather.description.includes('rain')" class="rain-icon"></div>
+        </div>
+      </div>
+
+      <div class="weather-description">
+        {{ weather.description }}
+      </div>
+
+      <div class="weather-details">
+        <div class="detail-item">
+          <div class="detail-icon humidity-icon"></div>
+          <div class="detail-value">{{ weather.humidity }}%</div>
+          <div class="detail-label">Humidity</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-icon wind-icon"></div>
+          <div class="detail-value">{{ weather.windSpeed || '--' }} km/h</div>
+          <div class="detail-label">Wind</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-icon pressure-icon"></div>
+          <div class="detail-value">{{ weather.pressure || '--' }} hPa</div>
+          <div class="detail-label">Pressure</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="login-prompt" *ngIf="!(isAuthenticated$ | async)">
+  <p>Please login to see your tasks</p>
+</div>
+
+<app-footer></app-footer>
+
+
+
