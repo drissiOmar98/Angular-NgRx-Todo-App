@@ -1,59 +1,63 @@
-# TaskManager
+# 🚀 NgRx Productivity App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.11.
 
-## Development server
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Angular](https://img.shields.io/badge/Angular-17+-DD0031?logo=angular)](https://angular.io/)
+[![NgRx](https://img.shields.io/badge/NgRx-16+-BA55D3?logo=ngrx)](https://ngrx.io/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?logo=typescript)](https://www.typescriptlang.org/)
+[![RxJS](https://img.shields.io/badge/RxJS-7.0+-B7178C?logo=rxjs)](https://rxjs.dev/)
 
-To start a local development server, run:
+<img src="https://ngrx.io/generated/images/guide/store/state-management-lifecycle.png" alt="NgRx Architecture" width="600">
 
-```bash
-ng serve
-```
+A modern **Task Management** application built with Angular's reactive state management powered by NgRx, featuring secure authentication and real-time weather integration.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🌟 Key Features
 
-```bash
-ng generate component component-name
-```
+### 🧠 Core Functionality
+- ✅ **Complete Task Management** (Add, Remove, Toggle Completion)
+- 🔐 **JWT Authentication Flow** (Login/Logout)
+- 🌦️ **Real-time Weather Dashboard** (OpenWeatherMap API)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### ⚡ State Management
+- 🏗️ **NgRx Store** - Centralized application state  
+- ✨ **Actions** - Events describing state changes (login, addTask, loadWeather)  
+- 🔄 **Effects** - Side effect model for API calls  
+- 🎯 **Selectors** - Efficient, memoized access to specific parts of the state
+- ✨ **Reducers** - Immutable state transitions  
 
-```bash
-ng generate --help
-```
+### 🎨 UI/UX
+- 🧩 **Standalone Components** - Modern Angular architecture
+- 🏎️ **Reactive Templates** - Async pipe patterns
+- 🎭 **Animations** - Smooth UI transitions
+- 📱 **Fully Responsive** - Mobile-first design
 
-## Building
+## 🛠️ Tech Stack
 
-To build the project run:
+### 🧱 Core Frameworks
 
-```bash
-ng build
-```
+| Technology | Purpose | Version |
+|------------|---------|---------|
+| <img src="https://angular.io/assets/images/logos/angular/angular.svg" width="20"/> Angular | Frontend Framework | 17+ |
+| <img src="https://ngrx.io/assets/images/badge.svg" width="20"/> NgRx | State Management | 16+ |
+| <img src="https://cdn.worldvectorlogo.com/logos/rxjs-1.svg" width="20"/> RxJS | Reactive Programming | 7+ |
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### 🧰 Key Libraries
 
-## Running unit tests
+| Technology | Purpose |
+|------------|---------|
+| <img src="https://raw.githubusercontent.com/remojansen/logo.ts/master/ts.png" width="20"/> TypeScript | Type Safety |
+| <img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" width="20"/> OpenWeather | Weather API |
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## 📂 Project Structure
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```text
+src/
+├── app/
+│   ├── auth/               # Authentication
+│   ├── task-store/         # Task management
+│   ├── weather-store/      # Weather data
+│   └── app.state.ts        # Root state
+├── assets/                # Static files
+└── environments/          # Configuration
